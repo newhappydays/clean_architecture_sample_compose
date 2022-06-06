@@ -2,9 +2,11 @@ package io.linkey.app.android.clean_architecture_sample_compose.ui.wine.list
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.linkey.app.android.clean_architecture_sample_compose.ui.base.BaseViewModel
 import io.linkey.app.android.clean_architecture_sample_compose.ui.base.UiState
+import io.linkey.app.android.clean_architecture_sample_compose.ui.base.ViewModelUtil.callUseCase
 import io.linkey.app.android.domain.entity.wine.Wine
 import io.linkey.app.android.domain.entity.wine.WineCategory
 import io.linkey.app.android.domain.usecase.wine.GetWinesUseCase
@@ -13,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class WineListViewModel @Inject constructor(
     private val getSamplesUseCase: GetWinesUseCase
-) : BaseViewModel(){
+) : ViewModel(){
 
     private val _categoryState = mutableStateOf(UiState(WineCategory.sample))
     val categoryState : State<UiState<List<WineCategory>>> = _categoryState
@@ -26,8 +28,10 @@ class WineListViewModel @Inject constructor(
     }
 
     private fun getWines(wine: String) {
-        callUseCase(getSamplesUseCase.invoke(wine)) {
-            _wineListState.value = UiState(data = it)
+        callUseCase(getSamplesUseCase.invoke(wine)) { state ->
+            state.data?.let {
+                _wineListState.value = UiState(data = it)
+            }
         }
     }
 

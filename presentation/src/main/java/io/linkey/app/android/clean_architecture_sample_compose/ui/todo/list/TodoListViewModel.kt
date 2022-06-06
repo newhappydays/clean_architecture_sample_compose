@@ -2,6 +2,7 @@ package io.linkey.app.android.clean_architecture_sample_compose.ui.todo.list
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.linkey.app.android.clean_architecture_sample_compose.ui.base.BaseViewModel
@@ -15,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class TodoListViewModel @Inject constructor(
     private val getTodosUseCase: GetTodosUseCase
-) : BaseViewModel() {
+) : ViewModel() {
 
     private val _todoDataState = mutableStateOf(UiState<List<Todo>>())
     val todoDataState : State<UiState<List<Todo>>> = _todoDataState

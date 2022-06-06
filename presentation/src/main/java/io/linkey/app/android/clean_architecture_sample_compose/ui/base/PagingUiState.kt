@@ -6,5 +6,6 @@ data class PagingUiState<T>(
     val last : Boolean = false,
     val page : Int = 0,
     val isLoading : Boolean = false,
-    val error : String = "",
+    val refresh : Boolean = false,
+    val error : Boolean = false,
 )

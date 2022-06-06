@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.linkey.app.android.clean_architecture_sample_compose.ui.base.BaseViewModel
@@ -26,7 +27,7 @@ class TodoEditViewModel @Inject constructor(
     private val updateTodoUseCase: UpdateTodoUseCase,
     private val getTodoDetailUseCase: GetTodoDetailUseCase,
     savedStateHandle: SavedStateHandle
-) : BaseViewModel() {
+) : ViewModel() {
 
     private val _todoState = mutableStateOf(Todo(0,"","",""))
     val todoState : State<Todo> = _todoState

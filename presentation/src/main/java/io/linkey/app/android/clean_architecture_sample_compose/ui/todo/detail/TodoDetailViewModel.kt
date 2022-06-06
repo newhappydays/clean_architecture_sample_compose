@@ -3,6 +3,7 @@ package io.linkey.app.android.clean_architecture_sample_compose.ui.todo.detail
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.linkey.app.android.clean_architecture_sample_compose.ui.base.BaseViewModel
@@ -22,7 +23,7 @@ class TodoDetailViewModel @Inject constructor(
     private val getTodoDetailUseCase: GetTodoDetailUseCase,
     private val deleteTodoUseCase: DeleteTodoUseCase,
     savedStateHandle: SavedStateHandle
-) : BaseViewModel() {
+) : ViewModel() {
 
     private val _todoDetailState = mutableStateOf(UiState<Todo>())
     val todoDetailState : State<UiState<Todo>> = _todoDetailState
